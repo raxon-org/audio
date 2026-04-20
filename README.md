@@ -29,10 +29,10 @@ Speech recognition can be complex, but it doesn't have to be. Whisper.php simpli
 
 ## Installation
 
-Install the library using Composer:
+Install the library using app:
 
 ```bash
-composer require codewithkyrian/whisper.php
+app install  raxon/audio -patcg
 ```
 
 Whisper.php requires the FFI extension to be enabled. In your php.ini configuration file, uncomment or add:
