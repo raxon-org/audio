@@ -86,7 +86,23 @@ Downloading and managing whisper models can be a complex process. Whisper.php si
 convenient utility that
 streamlines model acquisition and management.
 
+
+
 ```php
+public const MODELS = [
+    'tiny.en',
+    'tiny',
+    'base.en',
+    'base',
+    'small.en',
+    'small',
+    'medium.en',
+    'medium',
+    'large-v1',
+    'large-v2',
+    'large-v3',
+    'large',
+];
 // Automatically download and load a model if it's already downloaded
 $modelPath = ModelLoader::loadModel('tiny.en', __DIR__.'/models');
 ```
