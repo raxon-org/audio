@@ -23,7 +23,6 @@ use Exception;
 
 trait Main {
     const NAME = 'Audio';
-    const ROUTE_NAME = 'application-ollama-manager';
     /**
      * @throws DirectoryCreateException
      * @throws Exception
