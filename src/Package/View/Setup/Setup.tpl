@@ -1,7 +1,4 @@
-{{$register = Package.Raxon.Ollama.Gui:Init:register()}}
+{{$register = Package.Raxon.Audio:Init:register()}}
 {{if(!is.empty($register))}}
-{{Package.Raxon.Ollama.Gui:Import:role.system()}}
-{{$flags = flags()}}
-{{$options = options()}}
-{{Package.Raxon.Ollama.Gui:Main:install($flags, $options)}}
+{{Package.Raxon.Audio:Import:role.system()}}
 {{/if}}
