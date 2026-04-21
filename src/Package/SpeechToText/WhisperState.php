@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Package\Audio\SpeechToText;
+namespace Package\Raxon\Audio\SpeechToText;
 
 use FFI;
 
