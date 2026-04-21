@@ -23,6 +23,8 @@ class ModelLoader
         if (file_exists($modelPath)) {
             return $modelPath;
         }
+        d(file_exists($modelPath));
+        dd($modelPath);
 
         $url = sprintf(self::DOWNLOAD_URL, $modelName);
 
