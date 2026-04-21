@@ -32,7 +32,7 @@ Speech recognition can be complex, but it doesn't have to be. Whisper.php simpli
 Install the library using app:
 
 ```bash
-app install  raxon/audio -patcg
+app install  raxon/audio -patch
 ```
 
 Whisper.php requires the FFI extension to be enabled. In your php.ini configuration file, uncomment or add:
