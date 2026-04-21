@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Codewithkyrian\Whisper;
+namespace Package\Audio\SpeechToText;
 
 /**
  * Base exception class for all Whisper-related errors

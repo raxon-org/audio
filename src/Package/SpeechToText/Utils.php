@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Codewithkyrian\Whisper;
+namespace Package\Audio\SpeechToText;
 
 function readAudio($path, int $chunkSize = 2048): array
 {

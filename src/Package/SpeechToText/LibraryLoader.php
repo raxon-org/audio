@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Codewithkyrian\Whisper;
+namespace Package\Audio\SpeechToText;
 
 use Codewithkyrian\PlatformPackageInstaller\Platform;
 use FFI;
