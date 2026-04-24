@@ -6,7 +6,7 @@
     {
       "name": "Audio:speech.to.text",
       "#class": "Account.Permission"
-    },,
+    },
     {
       "name": "Audio:speech.to.text.task",
       "#class": "Account.Permission"
