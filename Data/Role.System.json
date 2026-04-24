@@ -10,6 +10,11 @@
     {
       "name": "Audio:speech.to.text.task",
       "#class": "Account.Permission"
+    },
+    {
+      "name": "Audio:speech.to.text.task2",
+      "#class": "Account.Permission",
+      "#comment": "test"
     }
   ]
 }
