@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Codewithkyrian\Whisper\Samplerate;
+use Package\Raxon\Audio\Whisper\Samplerate;
 use FFI\CData;
 
 beforeEach(function () {

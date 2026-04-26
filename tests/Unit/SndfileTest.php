@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Codewithkyrian\Whisper\Sndfile;
+use Package\Raxon\Audio\Whisper\Sndfile;
 use FFI\CData;
 
 beforeEach(function () {

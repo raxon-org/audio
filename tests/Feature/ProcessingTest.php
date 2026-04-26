@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Codewithkyrian\Whisper\SegmentData;
-use Codewithkyrian\Whisper\TokenData;
-use Codewithkyrian\Whisper\WhisperContext;
-use Codewithkyrian\Whisper\WhisperFullParams;
+use Package\Raxon\Audio\Whisper\SegmentData;
+use Package\Raxon\Audio\Whisper\Whisper\TokenData;
+use Package\Raxon\Audio\Whisper\Whisper\WhisperContext;
+use Package\Raxon\Audio\Whisper\Whisper\WhisperFullParams;
 
 beforeEach(function () {
     if (! extension_loaded('ffi')) {

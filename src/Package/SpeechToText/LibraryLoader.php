@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Package\Raxon\Audio\SpeechToText;
 
-use Codewithkyrian\PlatformPackageInstaller\Platform;
+use Package\Raxon\Audio\PlatformPackageInstaller\Platform;
 use FFI;
 use RuntimeException;
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Codewithkyrian\Whisper\DtwMode;
-use Codewithkyrian\Whisper\DtwParameters;
-use Codewithkyrian\Whisper\LibraryLoader;
-use Codewithkyrian\Whisper\WhisperContextParameters;
+use Package\Raxon\Audio\Whisper\DtwMode;
+use Package\Raxon\Audio\Whisper\DtwParameters;
+use Package\Raxon\Audio\Whisper\LibraryLoader;
+use Package\Raxon\Audio\Whisper\WhisperContextParameters;
 
 beforeEach(function () {
     $this->ffi = (new LibraryLoader())->get('whisper');
