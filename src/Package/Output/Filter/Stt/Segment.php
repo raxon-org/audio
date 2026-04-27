@@ -9,9 +9,9 @@ class Segment extends Controller {
 
     public static function segment_filter(App $object, $destination, $filter, $response=null): array | object
     {
-        d($destination);
-        d($filter);
-        d($response);
+//        d($destination);
+//        d($filter);
+//        d($response);
         return $response;
     }
 }
