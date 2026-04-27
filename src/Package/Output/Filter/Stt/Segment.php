@@ -7,9 +7,10 @@ use Raxon\Module\Controller;
 class Segment extends Controller {
     const DIR = __DIR__ . '/';
 
-    public static function segment_filter(App $object, $destination, $response=null): array | object
+    public static function segment_filter(App $object, $destination, $filter, $response=null): array | object
     {
         d($destination);
+        d($filter);
         d($response);
         return $response;
     }
