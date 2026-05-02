@@ -143,21 +143,26 @@ class Audio extends Controller {
                             */
                             $commands[] = (object) [
                                 'command' => [
-                                    'on in, open file manager',
-                                    'i need open file manager',
-                                    'a neat open file manager',
-                                    'for me, oglefall went in here',
-                                    'i need oklahoma in a year',
-                                    'let me open fire manager',
-                                    'i need over 5 minutes here',
-                                    'honey, open file manager'
+                                    'open file manager',
+                                    'oglefall went in here',
+                                    'oklahoma in a year',
+                                    'open fire manager',
+                                    'over 5 minutes here',
+                                ],
+                                'start_command' => [
+                                    'onnie',
+                                    'honney'
                                 ],
                                 "url" => '{{route.get(route.name(\'application.file.manager\'))}}',
                             ];
                             foreach($commands as $command){
                                 foreach($command->command as $text_command){
-                                    if(stristr($output, $text_command)){
-                                        ddd($command);
+                                    foreach($command->start_command as $start_command){
+                                        if(stristr($output, $start_command)){
+                                            if(stristr($output, $text_command)){
+                                                ddd($command);
+                                            }
+                                        }
                                     }
                                 }
                             }
