@@ -142,18 +142,18 @@ class Audio extends Controller {
                             ddd($route->get(Route::name('application.file.manager')));
                             */
                             $commands[] = (object) [
+                                'start_command' => [
+                                    'onnie',
+                                    'honney',
+                                    'i need ',
+                                    'for me',
+                                ],
                                 'command' => [
                                     'open file manager',
                                     'oglefall went in here',
                                     'oklahoma in a year',
                                     'open fire manager',
                                     'over 5 minutes here',
-                                ],
-                                'start_command' => [
-                                    'onnie',
-                                    'honney',
-                                    'i need ',
-                                    'for me',
                                 ],
                                 "url" => '{{route.get(route.name(\'application.file.manager\'))}}',
                             ];
