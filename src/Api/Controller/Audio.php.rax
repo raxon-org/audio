@@ -1,0 +1,240 @@
+{{$options = options()}}
+<?php
+namespace Domain\{{php.namespace.host($options.backend.host)}}\Controller;
+
+use Package\Raxon\Audio\SpeechToText\Whisper;
+use Package\Raxon\Task\Module\Status;
+use Raxon\Doctrine\Module\Entity;
+use Doctrine\ORM\Exception\ORMException;
+use Package\Raxon\Account\Module\Permission;
+
+use Raxon\App;
+use Raxon\Config;
+
+use Raxon\Module\Core;
+use Raxon\Module\Controller;
+
+use Raxon\Module\Destination;
+use Raxon\Module\Dir;
+use Raxon\Module\File;
+
+use Raxon\Module\OutputFilter;
+use Raxon\Module\Response;
+
+use Raxon\Doctrine\Module\Database;
+
+use Raxon\Module\Route;
+use Raxon\Node\Module\Node;
+
+use Exception;
+
+use Raxon\Exception\AuthorizationException;
+use Raxon\Exception\LocateException;
+use Raxon\Exception\UrlEmptyException;
+use Raxon\Exception\UrlNotExistException;
+use Raxon\Exception\FileWriteException;
+use Raxon\Exception\ObjectException;
+
+class Audio extends Controller {
+    const DIR = __DIR__ . DIRECTORY_SEPARATOR;
+    const NAME = 'Audio';
+
+    /**
+     * @throws \Doctrine\DBAL\Exception
+     * @throws ORMException
+     */
+    public static function speech_to_text(App $object){
+        try {
+            $role = Permission::controller(
+                $object,
+                Audio::NAME,
+                __FUNCTION__,
+                $user
+            );
+            if($role){
+                //task create needs to return an uuid.
+                //need host backend
+                $name = 'Domain:' . Core::ucfirst_sentence("{{$options.backend.host}}") . ':Controller:Audio:speech.to.text.task';
+                $command = 'app raxon/task create -controller[]=' . $name . ' -user.email=' . $user->email;
+                foreach($object->request() as $key => $value){
+                    if($key === 'request'){
+                        continue;
+                    }
+                    $command .= ' -request.' . $key . '=' . $value;
+                }
+                exec($command, $output);
+                $record = Core::object(implode("\n", $output));
+                $entity = 'Task';
+                $node = new Node($object);
+                $role_system = $node->role_system();
+                $counter = 0;
+                while(true){
+                    $app_cache = $object->get(App::CACHE);
+                    $config = Database::config($object);
+                    $connection = $object->config('doctrine.environment.system.*');
+                    $connection->manager = Database::entity_manager($object, $config, $connection);
+                    $cache = $connection->manager->getConfiguration()->getQueryCache();
+                    $cache->clear();
+                    $cache = $connection->manager->getConfiguration()->getMetadataCache();
+                    $cache->clear();
+                    $cache = $connection->manager->getConfiguration()->getResultCache();
+                    $cache->clear();
+                    $cache = $connection->manager->getUnitOfWork();
+                    $cache->clear();
+                    $connection->manager->clear();
+                    if($app_cache){
+                        $object->set(App::CACHE, $app_cache);
+                    }
+                    $repository = $connection->manager->getRepository('\\Entity\\Task');
+                    $repository_record = $repository->findOneBy([
+                        'uuid' => $record->uuid,
+                        'status' => Status::COMPLETED
+                    ]);
+                    if($repository_record !== null){
+                        $expose = Entity::expose_get(
+                            $object,
+                            $entity,
+                            $entity . '.read.output'
+                        );
+                        $record = [];
+                        $record = (object) Entity::output(
+                            $object,
+                            $repository_record,
+                            $expose,
+                            $entity,
+                            'read',
+                            $record,
+                            $role_system
+                        );
+                        $record->counter = $counter;
+                        if(property_exists($record, 'output')){
+                            $output = '';
+                            foreach($record->output as $key => $value){
+                                if(is_array($value) && array_key_exists('text', $value)){
+                                    //add some json from to here and add a form for it...
+                                    if(stristr($value['text'], 'blank_audio')){
+                                        $output .= ' ';
+                                    } else {
+                                    //On in, open file manager.
+                                        $output .= $value['text'];
+                                    }
+                                }
+                            }
+                            $commands = [];
+
+                            $route = $object->get(Route::NAME);
+                            ddd($route);
+
+
+                            $commands[] = (object) [
+                                'command' => 'On in, open file manager',
+                                "url" => '{{route.get(route.name(\'application.file.manager\'))}}',
+                            ];
+                            foreach($commands as $command){
+                                if($output === $command->command){
+
+                                }
+                            }
+                            echo $output;
+                        }
+                        break;
+                    }
+                    usleep((int) (1/8 * 1000 * 1000));
+                    $counter++;
+                    if($counter > 80){
+                        break;
+                    }
+                }
+                exit(0);
+            }
+        } catch (Exception | FileWriteException | ObjectException | LocateException | UrlEmptyException | UrlNotExistException $exception){
+            return $exception;
+        }
+    }
+
+     /**
+         * @throws \Doctrine\DBAL\Exception
+         * @throws ORMException
+         */
+        public static function speech_to_text_task(App $object): array | Exception
+        {
+            try {
+                $role = Permission::controller(
+                    $object,
+                    Audio::NAME,
+                    __FUNCTION__,
+                    $user
+                );
+                if($role){
+                    $dir_model = $object->config('project.dir.asset') . 'Audio/STT/';
+                    Dir::create($dir_model, Dir::CHMOD);
+                    $whisper = Whisper::fromPretrained('tiny.en', $dir_model);
+                    //$whisper = Whisper::fromPretrained('small.en', $dir_model);
+                    $audio = readAudio($object->request('url'));
+                    $segments = $whisper->transcribe($audio, 4);
+                    // Accessing segment data
+                    $output = [];
+                    foreach ($segments as $segment) {
+                        $output[] = (object) [
+                            'segment' => $segment->segment,
+                            'text' => $segment->text,
+                            'start' => $segment->startTimestamp,
+                            'end' => $segment->endTimestamp,
+                        ];
+                    }
+                    //outputfilter
+                    $list = [
+                        (object) [
+                            "uuid" => Core::uuid(),
+                            "options" => (object) [
+                                "priority" => 10,
+                                "command" => [],
+                                "controller" => [
+                                    "Package:Raxon:Audio:Output:Filter:Stt:Segment:segment.filter"
+                                ]
+                            ],
+                            "route" => "*",
+                            "#class" => "System.Output.Filter"
+                        ]
+                    ];
+                    OutputFilter::on($object, $list);
+                    $destination = new Destination();
+                    $route = (object) [
+                        'controller' => $object->request('controller'),
+                        'function' => $object->request('function')
+                    ];
+                    $route = Route::controller($route);
+                    $destination->set('controller',  $route->controller);
+                    $destination->set('function', $route->function);
+                    App::controller($object, $destination);
+                    $controller = $destination->get('controller');
+                    $methods = get_class_methods($controller);
+                    $function = $destination->get('function');
+                    $output = OutputFilter::trigger($object, $destination, [
+                        'methods' => $methods,
+                        'function' => $function,
+                        'response' => $output
+                    ]);
+                    /*
+                    //make patch of task and update output
+                    $config = Database::config($object);
+                    $connection = $object->config('doctrine.environment.system.*');
+                    $connection->manager = Database::entity_manager($object, $config, $connection);
+                    $entity = 'Task';
+                    $node = new Node($object);
+                    $role_system = $node->role_system();
+                    $repository = $connection->manager->getRepository('\\Entity\\Task');
+                    $record = $repository->findOneBy([
+                        'uuid' => $record->uuid
+                    ]);
+                    $record-
+                    ddd($output);
+                    */
+                    return $output['response'] ?? [];
+                }
+            } catch (Exception | FileWriteException | ObjectException | LocateException | UrlEmptyException | UrlNotExistException $exception){
+                return $exception;
+            }
+            return [];
+        }
+}

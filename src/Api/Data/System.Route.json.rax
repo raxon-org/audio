@@ -1,0 +1,17 @@
+{
+    "System": {
+      "Route": [
+        {
+          "#class": "System.Route",
+          "name": "audio-speech-to-text",
+          "host": "{{options('backend.host')}}",
+          "controller": "Domain:{{app.controller.host(options('backend.host'))}}:Controller:Audio:speech.to.text",
+          "path": "/Audio/Speech/To/Text/",
+          "priority": 2001,
+          "method": [
+            "POST"
+          ]
+        }
+      ]
+    }
+}
