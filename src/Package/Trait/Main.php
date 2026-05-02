@@ -8,7 +8,9 @@ use Raxon\Doctrine\Module\Database;
 use Raxon\Doctrine\Module\Entity;
 use Raxon\Exception\DirectoryCreateException;
 
+use Raxon\Exception\FileWriteException;
 use Raxon\Exception\ObjectException;
+use Raxon\Exception\TemplateException;
 use Raxon\Module\Cli;
 use Raxon\Module\Controller;
 use Raxon\Module\Data;
@@ -481,7 +483,15 @@ trait Main {
         $this->install_service($read, $response_backend, $response_frontend, $options);
     }
 
-    private function install_service($read, $response_backend, $response_frontend, $options){
+    /**
+     * @throws DirectoryCreateException
+     * @throws ObjectException
+     * @throws TemplateException
+     * @throws FileWriteException
+     * @throws Exception
+     */
+    private function install_service($read, $response_backend, $response_frontend, $options): void
+    {
         $object = $this->object();
         foreach($read as $nr => $file){
             if($file->type === Dir::TYPE){

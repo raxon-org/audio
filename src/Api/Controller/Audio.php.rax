@@ -130,12 +130,15 @@ class Audio extends Controller {
                                 'command' => [
                                     'On in, open file manager',
                                     'I need open file manager',
+                                    'a neat open file manager',
                                 ],
                                 "url" => '{{route.get(route.name(\'application.file.manager\'))}}',
                             ];
                             foreach($commands as $command){
-                                if(in_array($output, $command->command, true)){
-                                    ddd($command);
+                                foreach($command->command as $text_command){
+                                    if(stristr($output, $text_command)){
+                                        ddd($command);
+                                    }
                                 }
                             }
                             echo $output;
