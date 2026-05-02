@@ -122,6 +122,15 @@ class Audio extends Controller {
                             }
                             $commands = [];
 
+                            $node = new Node($object);
+                            $record = $node->record('System.Route', $node->role_system(), [
+                                'name' => 'application.file.manager',
+                            ]);
+                            ddd($record);
+
+
+
+
                             //Route::configure($object);
                             $route = $object->data(App::ROUTE);
                             dd($route);
