@@ -147,7 +147,8 @@ class Audio extends Controller {
                                     'I need open file manager',
                                     'a neat open file manager',
                                     'For me, Oglefall went in here',
-                                    'I need Oklahoma in a year.'
+                                    'I need Oklahoma in a year',
+                                    'Let me open fire manager'
                                 ],
                                 "url" => '{{route.get(route.name(\'application.file.manager\'))}}',
                             ];
