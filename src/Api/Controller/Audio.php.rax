@@ -122,7 +122,7 @@ class Audio extends Controller {
                             }
                             $commands = [];
 
-                            $route = $object->get(Route::NAME);
+                            $route = $object->config(Route::NAME);
                             ddd($route);
 
 
