@@ -125,7 +125,7 @@ class Audio extends Controller {
                             $node = new Node($object);
                             $record = $node->record('System.Route', $node->role_system(), [
                                 'where' => [
-                                    'name === application.file.manager',
+                                    '\'name\' === \'application-file-manager\'',
                                 ]
                             ]);
                             ddd($record);
