@@ -442,13 +442,15 @@ trait Main {
         }
         $dir = new Dir();
         $read = $dir->read($dir_read_frontend, true);
-        foreach($read as $nr => $file){
-            $explode = explode($dir_read_frontend, $file->url, 2);
-            if(array_key_exists(1, $explode)){
-                $file->target = $dir_admin . $explode[1];
+        if(is_array($read)){
+            foreach($read as $nr => $file){
+                $explode = explode($dir_read_frontend, $file->url, 2);
+                if(array_key_exists(1, $explode)){
+                    $file->target = $dir_admin . $explode[1];
+                }
             }
+            $this->install_service($read, $response_backend, $response_frontend, $options);
         }
-        $this->install_service($read, $response_backend, $response_frontend, $options);
     }
 
     /**
@@ -487,8 +489,8 @@ trait Main {
                     $file->target = $dir_api . $explode[1];
                 }
             }
+            $this->install_service($read, $response_backend, $response_frontend, $options);
         }
-        $this->install_service($read, $response_backend, $response_frontend, $options);
     }
 
     /**
