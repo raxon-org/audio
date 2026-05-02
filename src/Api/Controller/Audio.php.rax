@@ -121,6 +121,7 @@ class Audio extends Controller {
                                 }
                             }
                             $commands = [];
+                            /*
 
                             $node = new Node($object);
                             $record = $node->record('System.Route', $node->role_system(), [
@@ -139,7 +140,7 @@ class Audio extends Controller {
                             dd(Route::name('application.file.manager'));
                             //$destination = Route::get(Route::name('application.file.manager'));
                             ddd($route->get(Route::name('application.file.manager')));
-
+                            */
                             $commands[] = (object) [
                                 'command' => [
                                     'On in, open file manager',
