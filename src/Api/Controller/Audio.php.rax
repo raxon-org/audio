@@ -126,7 +126,7 @@ class Audio extends Controller {
                             $route = $object->data(App::ROUTE);
 
                             //$destination = Route::get(Route::name('application.file.manager'));
-                            ddd($route->get(Route::name('application.file.manager'));
+                            ddd($route->get(Route::name('application.file.manager')));
 
                             $commands[] = (object) [
                                 'command' => [
