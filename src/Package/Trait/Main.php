@@ -451,6 +451,12 @@ trait Main {
         $this->install_service($read, $response_backend, $response_frontend, $options);
     }
 
+    /**
+     * @throws DirectoryCreateException
+     * @throws ObjectException
+     * @throws TemplateException
+     * @throws FileWriteException
+     */
     private function install_backend($response_backend, $response_frontend, $options): void
     {
         $object = $this->object();
@@ -474,10 +480,12 @@ trait Main {
         }
         $dir = new Dir();
         $read = $dir->read($dir_read_backend, true);
-        foreach($read as $nr => $file){
-            $explode = explode($dir_read_backend, $file->url, 2);
-            if(array_key_exists(1, $explode)){
-                $file->target = $dir_api . $explode[1];
+        if(is_array($read)){
+            foreach($read as $nr => $file){
+                $explode = explode($dir_read_backend, $file->url, 2);
+                if(array_key_exists(1, $explode)){
+                    $file->target = $dir_api . $explode[1];
+                }
             }
         }
         $this->install_service($read, $response_backend, $response_frontend, $options);
@@ -493,90 +501,92 @@ trait Main {
     private function install_service($read, $response_backend, $response_frontend, $options): void
     {
         $object = $this->object();
-        foreach($read as $nr => $file){
-            if($file->type === Dir::TYPE){
-                if(!File::exist($file->target)){
-                    Dir::create($file->target, Dir::CHMOD);
-                    File::permission($object, [
-                        'target' => $file->target,
-                    ]);
+        if(is_array($read)){
+            foreach($read as $nr => $file){
+                if($file->type === Dir::TYPE){
+                    if(!File::exist($file->target)){
+                        Dir::create($file->target, Dir::CHMOD);
+                        File::permission($object, [
+                            'target' => $file->target,
+                        ]);
+                    }
                 }
             }
-        }
-        $patch = $options->patch ?? null;
-        foreach($read as $nr => $file){
-            if($file->type === File::TYPE){
-                $file->extension = File::extension($file->target);
-                if($file->extension === 'rax'){
-                    $explode = explode('.rax', $file->target, 2);
-                    if(array_key_exists(1, $explode)){
-                        $file->target = $explode[0];
-                        $file->original_extension = File::extension($file->target);
-                        if(!File::exist($file->target) || $patch !== null){
-                            $clone_options = new Data();
-                            if(!property_exists($response_frontend['node'],'subdomain')){
-                                $clone_options->set('frontend.host', $response_frontend['node']->domain . '.' . $response_frontend['node']->extension);
-                            } else {
-                                $clone_options->set('frontend.host', $response_frontend['node']->subdomain . '.' . $response_frontend['node']->domain . '.' . $response_frontend['node']->extension);
-                            }
-                            if(!property_exists($response_backend['node'],'subdomain')){
-                                $clone_options->set('backend.host', $response_backend['node']->domain . '.' . $response_backend['node']->extension);
-                            } else {
-                                $clone_options->set('backend.host', $response_backend['node']->subdomain . '.' . $response_backend['node']->domain . '.' . $response_backend['node']->extension);
-                            }
-                            $data = new Data($object->data());
-                            $clone = clone $object;
-                            $clone->data(App::OPTIONS, $clone_options->data());
-                            switch($file->original_extension){
-                                case 'json':
-                                    echo Cli::info('Processing file:') . $file->target . PHP_EOL;
-                                    $content = $clone->parse_read($file->url);
-                                    if($patch !== null) {
-                                        File::delete($file->target);
-                                    }
-                                    File::write($file->target, Core::object($content->data(), Core::JSON));
-                                    File::permission($object, [
-                                        'target' => $file->target,
-                                    ]);
-                                    //imports should be in a json file (class => url/contains)
-                                    if(str_contains($file->target, 'System.Route')){
-                                        $command = 'app raxon/node object import -class=System.Route -url="' . $file->target . '" -patch';
-                                        Core::execute($object, $command, $output, $notification);
-                                        if($output){
-                                            echo $output;
+            $patch = $options->patch ?? null;
+            foreach($read as $nr => $file){
+                if($file->type === File::TYPE){
+                    $file->extension = File::extension($file->target);
+                    if($file->extension === 'rax'){
+                        $explode = explode('.rax', $file->target, 2);
+                        if(array_key_exists(1, $explode)){
+                            $file->target = $explode[0];
+                            $file->original_extension = File::extension($file->target);
+                            if(!File::exist($file->target) || $patch !== null){
+                                $clone_options = new Data();
+                                if(!property_exists($response_frontend['node'],'subdomain')){
+                                    $clone_options->set('frontend.host', $response_frontend['node']->domain . '.' . $response_frontend['node']->extension);
+                                } else {
+                                    $clone_options->set('frontend.host', $response_frontend['node']->subdomain . '.' . $response_frontend['node']->domain . '.' . $response_frontend['node']->extension);
+                                }
+                                if(!property_exists($response_backend['node'],'subdomain')){
+                                    $clone_options->set('backend.host', $response_backend['node']->domain . '.' . $response_backend['node']->extension);
+                                } else {
+                                    $clone_options->set('backend.host', $response_backend['node']->subdomain . '.' . $response_backend['node']->domain . '.' . $response_backend['node']->extension);
+                                }
+                                $data = new Data($object->data());
+                                $clone = clone $object;
+                                $clone->data(App::OPTIONS, $clone_options->data());
+                                switch($file->original_extension){
+                                    case 'json':
+                                        echo Cli::info('Processing file:') . $file->target . PHP_EOL;
+                                        $content = $clone->parse_read($file->url);
+                                        if($patch !== null) {
+                                            File::delete($file->target);
                                         }
-                                        if($notification){
-                                            echo $notification;
+                                        File::write($file->target, Core::object($content->data(), Core::JSON));
+                                        File::permission($object, [
+                                            'target' => $file->target,
+                                        ]);
+                                        //imports should be in a json file (class => url/contains)
+                                        if(str_contains($file->target, 'System.Route')){
+                                            $command = 'app raxon/node object import -class=System.Route -url="' . $file->target . '" -patch';
+                                            Core::execute($object, $command, $output, $notification);
+                                            if($output){
+                                                echo $output;
+                                            }
+                                            if($notification){
+                                                echo $notification;
+                                            }
                                         }
-                                    }
-                                    break;
-                                default:
-                                    echo Cli::info('Processing file:') . $file->target . PHP_EOL;
-                                    $clone_options->set('source', $file->url);
-                                    $flags = App::flags($clone);
-                                    $parse = new Parse($clone, $data, $flags, $clone_options->data());
-                                    $read = File::read($file->url);
-                                    $content = $parse->compile($read, $data);
-                                    if($patch !== null) {
-                                        File::delete($file->target);
-                                    }
-                                    File::write($file->target, $content);
-                                    File::permission($object, [
-                                        'target' => $file->target,
-                                    ]);
-                                    break;
+                                        break;
+                                    default:
+                                        echo Cli::info('Processing file:') . $file->target . PHP_EOL;
+                                        $clone_options->set('source', $file->url);
+                                        $flags = App::flags($clone);
+                                        $parse = new Parse($clone, $data, $flags, $clone_options->data());
+                                        $read = File::read($file->url);
+                                        $content = $parse->compile($read, $data);
+                                        if($patch !== null) {
+                                            File::delete($file->target);
+                                        }
+                                        File::write($file->target, $content);
+                                        File::permission($object, [
+                                            'target' => $file->target,
+                                        ]);
+                                        break;
+                                }
                             }
                         }
+                    } else {
+                        if($patch !== null) {
+                            File::delete($file->target);
+                        }
+                        echo Cli::info('Processing file:') . $file->target . PHP_EOL;
+                        File::copy($file->url, $file->target);
+                        File::permission($object, [
+                            'target' => $file->target,
+                        ]);
                     }
-                } else {
-                    if($patch !== null) {
-                        File::delete($file->target);
-                    }
-                    echo Cli::info('Processing file:') . $file->target . PHP_EOL;
-                    File::copy($file->url, $file->target);
-                    File::permission($object, [
-                        'target' => $file->target,
-                    ]);
                 }
             }
         }
