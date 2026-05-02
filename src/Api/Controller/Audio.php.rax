@@ -123,7 +123,7 @@ class Audio extends Controller {
                             $commands = [];
 
                             Route::configure($object);
-                            $destination = Route::get(Route::name('application.file.manager');
+                            $destination = Route::get(Route::name('application.file.manager'));
 
                             ddd($destination);
 
