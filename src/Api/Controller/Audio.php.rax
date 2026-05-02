@@ -163,9 +163,8 @@ class Audio extends Controller {
                                         if(
                                             stristr($output, $start_command) &&
                                             stristr($output, $text_command)
-                                            ){
-                                                ddd($command);
-                                            }
+                                        ){
+                                            ddd($command);
                                         }
                                     }
                                 }
