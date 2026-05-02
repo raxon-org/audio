@@ -143,12 +143,14 @@ class Audio extends Controller {
                             */
                             $commands[] = (object) [
                                 'command' => [
-                                    'On in, open file manager',
-                                    'I need open file manager',
+                                    'on in, open file manager',
+                                    'i need open file manager',
                                     'a neat open file manager',
-                                    'For me, Oglefall went in here',
-                                    'I need Oklahoma in a year',
-                                    'Let me open fire manager'
+                                    'for me, oglefall went in here',
+                                    'i need oklahoma in a year',
+                                    'let me open fire manager',
+                                    'i need over 5 minutes here',
+                                    'honey, open file manager'
                                 ],
                                 "url" => '{{route.get(route.name(\'application.file.manager\'))}}',
                             ];
