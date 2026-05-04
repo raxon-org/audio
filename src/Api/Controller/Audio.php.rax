@@ -52,6 +52,7 @@ class Audio extends Controller {
                 $user
             );
             if($role){
+                //move to service Audio::speech_to_text
                 //task create needs to return an uuid.
                 //need host backend
                 $name = 'Domain:' . Core::ucfirst_sentence("{{$options.backend.host}}") . ':Controller:Audio:speech.to.text.task';
@@ -200,6 +201,7 @@ class Audio extends Controller {
                     $user
                 );
                 if($role){
+                    //move to service Audio::speech_to_text_task
                     $dir_model = $object->config('project.dir.asset') . 'Audio/STT/';
                     Dir::create($dir_model, Dir::CHMOD);
                     $whisper = Whisper::fromPretrained('tiny.en', $dir_model);
