@@ -65,7 +65,7 @@ class Audio extends Controller {
                 }
                 exec($command, $output);
                 $record = Core::object(implode("\n", $output));
-                if(is_string($record){
+                if(is_string($record)){
                     throw new Exception($record);
                 }
                 $entity = 'Task';
@@ -90,6 +90,9 @@ class Audio extends Controller {
                         $object->set(App::CACHE, $app_cache);
                     }
                     $repository = $connection->manager->getRepository('\\Entity\\Task');
+                    if(is_string($record)){
+                        throw new Exception($record);
+                    }
                     $repository_record = $repository->findOneBy([
                         'uuid' => $record->uuid,
                         'status' => Status::COMPLETED
