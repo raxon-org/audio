@@ -63,6 +63,7 @@ class Audio extends Controller {
                     }
                     $command .= ' -request.' . $key . '=' . $value;
                 }
+                ddd($command);
                 exec($command, $output);
                 $record = Core::object(implode("\n", $output));
                 if(is_string($record)){
