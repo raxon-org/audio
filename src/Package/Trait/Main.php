@@ -25,6 +25,7 @@ use Exception;
 
 trait Main {
     const NAME = 'Audio';
+
     /**
      * @throws DirectoryCreateException
      * @throws Exception
