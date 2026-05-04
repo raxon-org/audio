@@ -65,6 +65,9 @@ class Audio extends Controller {
                 }
                 exec($command, $output);
                 $record = Core::object(implode("\n", $output));
+                if(is_string($record){
+                    throw new Exception($record);
+                }
                 $entity = 'Task';
                 $node = new Node($object);
                 $role_system = $node->role_system();
