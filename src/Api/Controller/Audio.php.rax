@@ -149,12 +149,6 @@ class Audio extends Controller {
                             ddd($route->get(Route::name('application.file.manager')));
                             */
                             $commands[] = (object) [
-                                'start_command' => [
-                                    'onnie',
-                                    'honney',
-                                    'i need ',
-                                    'for me',
-                                ],
                                 'command' => [
                                     'open file manager',
                                     'oglefall went in here',
@@ -166,13 +160,8 @@ class Audio extends Controller {
                             ];
                             foreach($commands as $command){
                                 foreach($command->command as $text_command){
-                                    foreach($command->start_command as $start_command){
-                                        if(
-                                            stristr($output, $start_command) &&
-                                            stristr($output, $text_command)
-                                        ){
-                                            ddd($command);
-                                        }
+                                    if(stristr($output, $text_command){
+                                        ddd($command);
                                     }
                                 }
                             }
