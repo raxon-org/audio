@@ -162,7 +162,7 @@ class Audio extends Controller {
                             $commands[] = $command;
                             foreach($commands as $command){
                                 foreach($command->command as $text_command){
-                                    if(stristr($output, $text_command){
+                                    if(stristr($output, $text_command)){
                                         ddd($command);
                                     }
                                 }
