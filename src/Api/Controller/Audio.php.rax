@@ -130,6 +130,7 @@ class Audio extends Controller {
                             $url = $object->config('controller.dir.data') . 'Commands' . $object->config('extension.json');
                             $data = $object->data_read($url);
                             $commands = $data->get('Commands');
+                            $route_url = '';
                             foreach($commands as $key => $command){
                                 $node = new Node($object);
                                 $record = $node->record('System.Route', $node->role_system(), [
