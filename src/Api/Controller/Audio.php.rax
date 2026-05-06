@@ -148,6 +148,10 @@ class Audio extends Controller {
                             //$destination = Route::get(Route::name('application.file.manager'));
                             ddd($route->get(Route::name('application.file.manager')));
                             */
+
+                            $url = $object->config('project.dir.data') . 'Commands' . $object->config('extension.json');
+                            ddd($url);
+                            /*
                             $command = (object) [
                                 'command' => [
                                     'open file manager',
@@ -159,6 +163,7 @@ class Audio extends Controller {
                                 'route' => 'application.file.manager',
                                 'url' => '{{route.get(route.name(' . $command->route .'))}}',
                             ];
+                            */
                             $commands[] = $command;
                             foreach($commands as $command){
                                 foreach($command->command as $text_command){

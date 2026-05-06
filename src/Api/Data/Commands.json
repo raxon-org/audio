@@ -1,0 +1,15 @@
+{
+    "Commands": [
+      {
+        "command" : [
+          "open file manager",
+          "oglefall went in here",
+          "oklahoma in a year",
+          "open fire manager",
+          "over 5 minutes here"
+      ],
+      "route" : "application.file.manager",
+      "url" : "{{route.get(route.name(' + $this->route  + '))}}",
+      }
+    ]
+}
