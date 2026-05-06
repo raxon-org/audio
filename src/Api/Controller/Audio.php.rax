@@ -128,7 +128,7 @@ class Audio extends Controller {
                                 }
                             }
                             $commands = [];
-                            /*
+
 
                             $node = new Node($object);
                             $record = $node->record('System.Route', $node->role_system(), [
@@ -137,10 +137,7 @@ class Audio extends Controller {
                                 ]
                             ]);
                             ddd($record);
-
-
-
-
+                            /*
                             //Route::configure($object);
                             $route = $object->data(App::ROUTE);
                             dd($route);
