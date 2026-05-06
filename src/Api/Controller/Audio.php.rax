@@ -149,7 +149,7 @@ class Audio extends Controller {
                             ddd($route->get(Route::name('application.file.manager')));
                             */
 
-                            $url = $object->config('project.dir.data') . 'Commands' . $object->config('extension.json');
+                            $url = $object->config('controller.dir.data') . 'Commands' . $object->config('extension.json');
                             ddd($url);
                             /*
                             $command = (object) [
