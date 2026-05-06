@@ -140,14 +140,15 @@ class Audio extends Controller {
                                 if(array_key_exists('REQUEST_SCHEME', $_SERVER) && $_SERVER['REQUEST_SCHEME'] === 'https'){
                                     $route_url = 'https://' . $record['node']->host . $record['node']->path;
                                 }
-                                ddd($route_url);
+                                foreach($commands as $command){
+                                    foreach($command->command as $text_command){
+                                        if(stristr($output, $text_command)){
+                                            d($route_url);
+                                            ddd($command);
+                                        }
+                                    }
+                                }
                             }
-                            dd($commands);
-
-
-
-
-
                             /*
                             //Route::configure($object);
                             $route = $object->data(App::ROUTE);
