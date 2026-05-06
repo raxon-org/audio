@@ -136,10 +136,10 @@ class Audio extends Controller {
                                     '\'name\' === \'application-file-manager\'',
                                 ]
                             ]);
-                            ddd($_SERVER);
-                            $route_url = $record['node']->host . $record['node']->patch;
-
-                            ddd($record);
+                            if(array_key_exists('REQUEST_SCHEME', $SERVER) && $SERVER['REQUEST_SCHEME'] === 'https'){
+                                $route_url = 'https://' . $record['node']->host . $record['node']->patch;
+                            }
+                            ddd($route_url);
                             /*
                             //Route::configure($object);
                             $route = $object->data(App::ROUTE);
