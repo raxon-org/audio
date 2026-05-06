@@ -10,6 +10,7 @@
       ],
       "route" : "application.file.manager",
       "route2": "{{$this.route}}",
+      "name": "{{route.nme(\"{{$this.route}}\")}}",
       "url" : "{{route.get(route.name(\"{{$this.route}}\"))}}"
       }
     ]
