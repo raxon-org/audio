@@ -127,19 +127,27 @@ class Audio extends Controller {
                                     }
                                 }
                             }
-                            $commands = [];
-
-
-                            $node = new Node($object);
-                            $record = $node->record('System.Route', $node->role_system(), [
-                                'where' => [
-                                    '\'name\' === \'application-file-manager\'',
-                                ]
-                            ]);
-                            if(array_key_exists('REQUEST_SCHEME', $_SERVER) && $_SERVER['REQUEST_SCHEME'] === 'https'){
-                                $route_url = 'https://' . $record['node']->host . $record['node']->path;
+                            $url = $object->config('controller.dir.data') . 'Commands' . $object->config('extension.json');
+                            $data = $object->data_read($url);
+                            $commands = $data->get('Commands');
+                            foreach($commands as $key => $command){
+                                $node = new Node($object);
+                                $record = $node->record('System.Route', $node->role_system(), [
+                                    'where' => [
+                                        '\'name\' === \'' . $command->route . '\'',
+                                    ]
+                                ]);
+                                if(array_key_exists('REQUEST_SCHEME', $_SERVER) && $_SERVER['REQUEST_SCHEME'] === 'https'){
+                                    $route_url = 'https://' . $record['node']->host . $record['node']->path;
+                                }
+                                ddd($route_url);
                             }
-                            ddd($route_url);
+                            dd($commands);
+
+
+
+
+
                             /*
                             //Route::configure($object);
                             $route = $object->data(App::ROUTE);
@@ -149,10 +157,6 @@ class Audio extends Controller {
                             ddd($route->get(Route::name('application.file.manager')));
                             */
 
-                            $url = $object->config('controller.dir.data') . 'Commands' . $object->config('extension.json');
-                            $data = $object->parse_read($url);
-                            $commands = $data->get('Commands');
-                            dd($commands);
                             /*
                             $command = (object) [
                                 'command' => [
