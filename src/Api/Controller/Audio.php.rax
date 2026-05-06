@@ -148,7 +148,7 @@ class Audio extends Controller {
                             //$destination = Route::get(Route::name('application.file.manager'));
                             ddd($route->get(Route::name('application.file.manager')));
                             */
-                            $commands[] = (object) [
+                            $command = (object) [
                                 'command' => [
                                     'open file manager',
                                     'oglefall went in here',
@@ -156,8 +156,10 @@ class Audio extends Controller {
                                     'open fire manager',
                                     'over 5 minutes here',
                                 ],
-                                "url" => '{{route.get(route.name(\'application.file.manager\'))}}',
+                                'route' => 'application.file.manager',
+                                'url' => '{{route.get(route.name(' . $command->route .'))}}',
                             ];
+                            $commands[] = $command;
                             foreach($commands as $command){
                                 foreach($command->command as $text_command){
                                     if(stristr($output, $text_command){
