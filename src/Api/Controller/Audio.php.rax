@@ -144,39 +144,14 @@ class Audio extends Controller {
                                 foreach($commands as $command){
                                     foreach($command->command as $text_command){
                                         if(stristr($output, $text_command)){
-                                            d($route_url);
-                                            ddd($command);
+                                            //return json object
+                                            $output = (object) [
+                                                'url' => $route_url,
+                                                'name' => $command->route
+                                            ];
+                                            echo Core::object($output, Core::JSON);
+                                            exit(0);
                                         }
-                                    }
-                                }
-                            }
-                            /*
-                            //Route::configure($object);
-                            $route = $object->data(App::ROUTE);
-                            dd($route);
-                            dd(Route::name('application.file.manager'));
-                            //$destination = Route::get(Route::name('application.file.manager'));
-                            ddd($route->get(Route::name('application.file.manager')));
-                            */
-
-                            /*
-                            $command = (object) [
-                                'command' => [
-                                    'open file manager',
-                                    'oglefall went in here',
-                                    'oklahoma in a year',
-                                    'open fire manager',
-                                    'over 5 minutes here',
-                                ],
-                                'route' => 'application.file.manager',
-                                'url' => '{{route.get(route.name(' . $command->route .'))}}',
-                            ];
-                            */
-                            $commands[] = $command;
-                            foreach($commands as $command){
-                                foreach($command->command as $text_command){
-                                    if(stristr($output, $text_command)){
-                                        ddd($command);
                                     }
                                 }
                             }
