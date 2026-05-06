@@ -151,8 +151,7 @@ class Audio extends Controller {
 
                             $url = $object->config('controller.dir.data') . 'Commands' . $object->config('extension.json');
                             $data = $object->parse_read($url);
-                            ddd($data);
-                            $commands = $data->get('commands');
+                            $commands = $data->get('Commands');
                             dd($commands);
                             /*
                             $command = (object) [
