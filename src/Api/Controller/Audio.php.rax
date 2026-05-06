@@ -136,6 +136,9 @@ class Audio extends Controller {
                                     '\'name\' === \'application-file-manager\'',
                                 ]
                             ]);
+                            ddd($_SERVER);
+                            $route_url = $record['node']->host . $record['node']->patch;
+
                             ddd($record);
                             /*
                             //Route::configure($object);
