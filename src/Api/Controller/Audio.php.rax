@@ -136,7 +136,7 @@ class Audio extends Controller {
                                     '\'name\' === \'application-file-manager\'',
                                 ]
                             ]);
-                            if(array_key_exists('REQUEST_SCHEME', $SERVER) && $SERVER['REQUEST_SCHEME'] === 'https'){
+                            if(array_key_exists('REQUEST_SCHEME', $_SERVER) && $_SERVER['REQUEST_SCHEME'] === 'https'){
                                 $route_url = 'https://' . $record['node']->host . $record['node']->patch;
                             }
                             ddd($route_url);
