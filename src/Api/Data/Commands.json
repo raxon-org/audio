@@ -9,7 +9,7 @@
           "over 5 minutes here"
       ],
       "route" : "application.file.manager",
-      "url" : "{{route.get(route.name(' + $this->route  + '))}}",
+      "url" : "{{route.get(route.name(' + $this.route  + '))}}"
       }
     ]
 }
