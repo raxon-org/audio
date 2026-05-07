@@ -140,6 +140,7 @@ class Audio extends Controller {
                                 ]);
                                 if(array_key_exists('REQUEST_SCHEME', $_SERVER) && $_SERVER['REQUEST_SCHEME'] === 'https'){
                                     //host can be .local .staging or .production or anything
+                                    d($command->route);
                                     $host = $node->record('System.Host', $node->role_system(), [
                                         'where' => [
                                         '\'url.production\' === \'' . $command->route . '\'',
