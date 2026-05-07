@@ -155,7 +155,6 @@ class Audio extends Controller {
                                         property_exists($record['node'], 'path')
                                     ){
                                         $route_url = $host['node']->url->{$environment} ?? '';
-                                        ddd($record['node']->path);
                                         $route_url .= $record['node']->path;
                                     }
                                 }
