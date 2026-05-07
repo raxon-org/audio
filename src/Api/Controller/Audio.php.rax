@@ -147,7 +147,7 @@ class Audio extends Controller {
                                     ]]);
                                     $environment = $object->config('framework.environment');
                                     d($environment);
-                                    d($host->url->{$environment} ?? null);
+                                    d($host['node']->url->{$environment} ?? null);
 
                                     ddd($host);
 
