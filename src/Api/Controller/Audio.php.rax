@@ -145,6 +145,10 @@ class Audio extends Controller {
                                         'where' => [
                                         '\'url.production\' partial \'' . $record['node']->host . '\'',
                                     ]]);
+                                    $environment = $object->config('framework.environment');
+                                    d($environment);
+                                    d($host->url->{$environment} ?? null);
+
                                     ddd($host);
 
 
