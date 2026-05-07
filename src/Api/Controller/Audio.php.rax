@@ -143,7 +143,7 @@ class Audio extends Controller {
                                     d($command->route);
                                     $host = $node->record('System.Host', $node->role_system(), [
                                         'where' => [
-                                        '\'url.production\' === \'' . $command->route . '\'',
+                                        '\'url.production\' === \'' . $record['node']->host . '\'',
                                     ]]);
                                     ddd($host);
 
