@@ -138,7 +138,7 @@ class Audio extends Controller {
                                     if(stristr($output_command, strtolower($text_command)) !== false){
                                         d($output_command);
                                         d(strtolower($text_command));
-                                        ddd(stristr($output_command, strtolower($text_command)));
+                                        ddd($command->route);
                                         $node = new Node($object);
                                         $route_record = $node->record('System.Route', $node->role_system(), [
                                             'where' => [
