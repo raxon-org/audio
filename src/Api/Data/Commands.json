@@ -21,7 +21,8 @@
           "move last line",
           "remove last line",
           "it is last line",
-          "that is last line"
+          "that is last line",
+          "race last line"
         ],
         "route" : "application-ollama-gui-line-eraser"
       }
