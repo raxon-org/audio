@@ -33,7 +33,8 @@
           "do lee last line",
           "delete last line",
           "erase last lines",
-          "arise last line"
+          "arise last line",
+          "Arrays offline"
         ],
         "route" : "application-ollama-line-eraser"
       }
