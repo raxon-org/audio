@@ -11,8 +11,15 @@
           "oklahoma in a year",
           "open fire manager",
           "over 5 minutes here"
-      ],
-      "route" : "application-file-manager"
+        ],
+        "route" : "application-file-manager"
+      },
+      {
+        "command" : [
+          "move last line",
+          "remove last line"
+        ],
+        "route" : "application-ollama-gui-line-eraser"
       }
     ]
 }
