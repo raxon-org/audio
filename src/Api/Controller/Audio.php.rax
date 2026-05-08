@@ -131,6 +131,7 @@ class Audio extends Controller {
                             $data = $object->data_read($url);
                             $commands = $data->get('Commands');
                             $route_url = '';
+                            $route_record = null;
                             foreach($commands as $key => $command){
                                 foreach($command->command as $text_command){
                                     if(stristr($output, $text_command)){
@@ -148,7 +149,7 @@ class Audio extends Controller {
                                     }
                                 }
                                 if(
-                                    $record !== null &&
+                                    $route_record !== null &&
                                     array_key_exists('node', $route_record) &&
                                     property_exists($route_record['node'], 'host') &&
                                     array_key_exists('REQUEST_SCHEME', $_SERVER) && $_SERVER['REQUEST_SCHEME'] === 'https'
