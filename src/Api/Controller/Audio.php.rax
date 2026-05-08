@@ -142,6 +142,7 @@ class Audio extends Controller {
                                             'memory' => true
                                         ]);
                                         if($record !== null){
+                                            dd($record);
                                             break 2;
                                         }
                                     }
