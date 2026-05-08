@@ -148,6 +148,7 @@ class Audio extends Controller {
                                         }
                                     }
                                 }
+                                ddd($route_record);
                                 if(
                                     $route_record !== null &&
                                     array_key_exists('node', $route_record) &&
