@@ -139,7 +139,12 @@ class Audio extends Controller {
                                     ],
                                     'memory' => true
                                 ]);
-                                if(array_key_exists('REQUEST_SCHEME', $_SERVER) && $_SERVER['REQUEST_SCHEME'] === 'https'){
+                                if(
+                                    $record !== null &&
+                                    array_key_exists('node', $record) &&
+                                    property_exists($record['node'], 'host') &&
+                                    array_key_exists('REQUEST_SCHEME', $_SERVER) && $_SERVER['REQUEST_SCHEME'] === 'https'
+                                ){
                                     $host = $node->record('System.Host', $node->role_system(), [
                                         'where' => [
                                             '\'url.production\' partial \'' . $record['node']->host . '\'',
