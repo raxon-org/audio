@@ -139,6 +139,7 @@ class Audio extends Controller {
                                     ],
                                     'memory' => true
                                 ]);
+                                d($record);
                                 if(
                                     $record !== null &&
                                     array_key_exists('node', $record) &&
