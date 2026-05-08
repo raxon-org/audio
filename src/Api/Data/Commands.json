@@ -27,7 +27,8 @@
           "i raised last line",
           "a raise last line",
           "we moved last line",
-          "you move last line"
+          "you move last line",
+          "do lee last line"
         ],
         "route" : "application-ollama-gui-line-eraser"
       }
