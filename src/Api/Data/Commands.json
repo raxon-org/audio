@@ -19,7 +19,8 @@
       {
         "command" : [
           "move last line",
-          "remove last line"
+          "remove last line",
+          "It is last line"
         ],
         "route" : "application-ollama-gui-line-eraser"
       }
