@@ -34,7 +34,8 @@
           "delete last line",
           "erase last lines",
           "arise last line",
-          "Arrays offline"
+          "arrays offline",
+          "a racialized line"
         ],
         "route" : "application-ollama-line-eraser"
       }
