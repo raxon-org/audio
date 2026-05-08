@@ -134,7 +134,7 @@ class Audio extends Controller {
                             $route_record = null;
                             foreach($commands as $key => $command){
                                 foreach($command->command as $text_command){
-                                    if(stristr(trim($output, '.'), strtolower($text_command))){
+                                    if(stristr(trim($output, '.'), strtolower($text_command)) !== false){
                                         $node = new Node($object);
                                         $route_record = $node->record('System.Route', $node->role_system(), [
                                             'where' => [
