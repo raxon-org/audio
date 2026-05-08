@@ -135,27 +135,27 @@ class Audio extends Controller {
                                 foreach($command->command as $text_command){
                                     if(stristr($output, $text_command)){
                                         $node = new Node($object);
-                                        $record = $node->record('System.Route', $node->role_system(), [
+                                        $route_record = $node->record('System.Route', $node->role_system(), [
                                             'where' => [
                                                 '\'name\' === \'' . $command->route . '\'',
                                             ],
                                             'memory' => true
                                         ]);
-                                        if($record !== null){
-                                            dd($record);
+                                        if($route_record !== null){
+                                            dd($route_record);
                                             break 2;
                                         }
                                     }
                                 }
                                 if(
                                     $record !== null &&
-                                    array_key_exists('node', $record) &&
-                                    property_exists($record['node'], 'host') &&
+                                    array_key_exists('node', $route_record) &&
+                                    property_exists($route_record['node'], 'host') &&
                                     array_key_exists('REQUEST_SCHEME', $_SERVER) && $_SERVER['REQUEST_SCHEME'] === 'https'
                                 ){
                                     $host = $node->record('System.Host', $node->role_system(), [
                                         'where' => [
-                                            '\'url.production\' partial \'' . $record['node']->host . '\'',
+                                            '\'url.production\' partial \'' . $route_record['node']->host . '\'',
                                         ],
                                         'memory' => true
                                     ]);
@@ -170,9 +170,9 @@ class Audio extends Controller {
                                     ){
                                         $route_url = $host['node']->url->{$environment} ?? '';
                                         if(substr($route_url, -1, 1) === '/'){
-                                            $route_url .= substr($record['node']->path, 1);
+                                            $route_url .= substr($route_record['node']->path, 1);
                                         } else {
-                                            $route_url .= $record['node']->path;
+                                            $route_url .= $route_record['node']->path;
                                         }
                                         $output = (object) [
                                             'url' => $route_url,
