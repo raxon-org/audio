@@ -145,6 +145,8 @@ class Audio extends Controller {
                                         ]);
                                         if($route_record !== null){
                                             break;
+                                        } else {
+                                            throw new Exception('Route not found: ' . $command->route);
                                         }
                                     }
                                 }
