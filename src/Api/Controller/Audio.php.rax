@@ -132,14 +132,20 @@ class Audio extends Controller {
                             $commands = $data->get('Commands');
                             $route_url = '';
                             foreach($commands as $key => $command){
-                                $node = new Node($object);
-                                $record = $node->record('System.Route', $node->role_system(), [
-                                    'where' => [
-                                        '\'name\' === \'' . $command->route . '\'',
-                                    ],
-                                    'memory' => true
-                                ]);
-                                d($record);
+                                foreach($command->command as $text_command){
+                                    if(stristr($output, $text_command)){
+                                        $node = new Node($object);
+                                        $record = $node->record('System.Route', $node->role_system(), [
+                                            'where' => [
+                                                '\'name\' === \'' . $command->route . '\'',
+                                            ],
+                                            'memory' => true
+                                        ]);
+                                        if($record !== null){
+                                            break 2;
+                                        }
+                                    }
+                                }
                                 if(
                                     $record !== null &&
                                     array_key_exists('node', $record) &&
@@ -154,6 +160,7 @@ class Audio extends Controller {
                                     ]);
                                     $environment = $object->config('framework.environment');
                                     if(
+                                        $host !== null &&
                                         array_key_exists('node', $host) &&
                                         property_exists($host['node'], 'url') &&
                                         property_exists($host['node']->url, $environment) &&
@@ -166,23 +173,15 @@ class Audio extends Controller {
                                         } else {
                                             $route_url .= $record['node']->path;
                                         }
-                                    }
-                                }
-                                foreach($commands as $command){
-                                    foreach($command->command as $text_command){
-                                        if(stristr($output, $text_command)){
-                                            //return json object
-                                            $output = (object) [
-                                                'url' => $route_url,
-                                                'name' => $command->route
-                                            ];
-                                            echo Core::object($output, Core::JSON);
-                                            exit(0);
-                                        }
+                                        $output = (object) [
+                                            'url' => $route_url,
+                                            'name' => $command->route
+                                        ];
+                                        echo Core::object($output, Core::JSON);
+                                        exit(0);
                                     }
                                 }
                             }
-                            echo $output;
                         }
                         break;
                     }
