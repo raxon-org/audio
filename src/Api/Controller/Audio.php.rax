@@ -143,7 +143,6 @@ class Audio extends Controller {
                                             ],
                                             'memory' => true
                                         ]);
-                                        ddd($route_record);
                                         if($route_record !== null){
                                             break 2;
                                         }
@@ -161,6 +160,7 @@ class Audio extends Controller {
                                         ],
                                         'memory' => true
                                     ]);
+                                    ddd($host);
                                     $environment = $object->config('framework.environment');
                                     if(
                                         $host !== null &&
