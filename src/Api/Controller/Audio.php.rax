@@ -134,7 +134,7 @@ class Audio extends Controller {
                             $route_record = null;
                             foreach($commands as $key => $command){
                                 foreach($command->command as $text_command){
-                                    $output_command = strtolower(trim($output, '.: '));
+                                    $output_command = str_replace(['  ', '   '], ' ', trim(strtolower(str_replace(['.',',','],' ', $output)), ' '));
                                     d($output_command);
                                     d(strtolower($text_command));
                                     d(stristr($output_command, strtolower($text_command)));
