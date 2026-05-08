@@ -127,7 +127,6 @@ class Audio extends Controller {
                                     }
                                 }
                             }
-                            dd($output);
                             $url = $object->config('controller.dir.data') . 'Commands' . $object->config('extension.json');
                             $data = $object->data_read($url);
                             $commands = $data->get('Commands');
@@ -136,7 +135,7 @@ class Audio extends Controller {
                             foreach($commands as $key => $command){
                                 foreach($command->command as $text_command){
                                     $output_command = trim($output, '.: ');
-                                    d($output);
+                                    d($output_command);
                                     dd($text_command);
                                     if(stristr($output_command, strtolower($text_command)) !== false){
                                         $node = new Node($object);
