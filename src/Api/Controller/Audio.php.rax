@@ -148,7 +148,6 @@ class Audio extends Controller {
                                         }
                                     }
                                 }
-                                dd($route_record);
                                 if(
                                     $route_record !== null &&
                                     array_key_exists('node', $route_record) &&
@@ -161,7 +160,6 @@ class Audio extends Controller {
                                         ],
                                         'memory' => true
                                     ]);
-                                    ddd($host);
                                     $environment = $object->config('framework.environment');
                                     if(
                                         $host !== null &&
