@@ -64,8 +64,8 @@ class Audio extends Controller {
                 $role_system = $node->role_system();
                 $task = new Task();
                 $task->setUser($user->uuid);
-                $task->setRequest($this->request());
-                $task->setCommand([]]);
+                $task->setRequest($object->request());
+                $task->setCommand([]);
                 $task->setController([
                     $name
                 ]);
