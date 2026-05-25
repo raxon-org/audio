@@ -79,36 +79,16 @@ class Audio extends Controller {
                     $entity,
                     $entity . '.create.output'
                 );
-                $response = [];
-                $response = Entity::output(
+                $record = [];
+                $record = Entity::output(
                     $object,
                     $task,
                     $expose,
                     $entity,
                     'create',
-                    $response,
+                    $record,
                     $role
                 );
-                dd($response);
-                /*
-                $command = 'app raxon/task create -controller[]=' . escapeshellarg($name) . ' -user.email=' . escapeshellarg($user->email);
-                foreach($object->request() as $key => $value){
-                    if($key === 'request'){
-                        continue;
-                    }
-                    $command .= ' -request.' . escapeshellcmd($key) . '=' . escapeshellarg($value);
-                }
-                Core::execute($object, $command, $output, $notification);
-                //$record = Core::object(implode("\n", $output, $notification));
-                d($output);
-                dd($notification);
-                */
-                dd($response);
-                /*
-                if(is_string($record)){
-                    throw new Exception(implode("\n", $output));
-                }
-                */
                 $entity = 'Task';
                 $node = new Node($object);
                 $role_system = $node->role_system();
