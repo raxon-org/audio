@@ -27,6 +27,7 @@ use Raxon\Module\Route;
 use Raxon\Node\Module\Node;
 
 use Exception;
+Use Entity\Task;
 
 use Raxon\Exception\AuthorizationException;
 use Raxon\Exception\LocateException;
