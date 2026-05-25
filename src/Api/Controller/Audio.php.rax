@@ -80,7 +80,7 @@ class Audio extends Controller {
                     $entity . '.create.output'
                 );
                 $record = [];
-                $record = Entity::output(
+                $record = (object) Entity::output(
                     $object,
                     $task,
                     $expose,
