@@ -56,6 +56,38 @@ class Audio extends Controller {
                 //task create needs to return an uuid.
                 //need host backend
                 $name = 'Domain:' . Core::ucfirst_sentence("{{$options.backend.host}}") . ':Controller:Audio:speech.to.text.task';
+                $config = Database::config($object);
+                $connection = $object->config('doctrine.environment.system.*');
+                $connection->manager = Database::entity_manager($object, $config, $connection);
+                $entity = 'Task';
+                $node = new Node($object);
+                $role_system = $node->role_system();
+                $task = new Task();
+                $task->setUser($user->uuid);
+                $task->setRequest($this->request());
+                $task->setCommand([]]);
+                $task->setController([
+                    $name
+                ]);
+                $task->setStatus(Status::PENDING);
+                $connection->manager->persist($task);
+                $connection->manager->flush();
+                $expose = Entity::expose_get(
+                    $object,
+                    $entity,
+                    $entity . '.'. __FUNCTION__ . '.output'
+                );
+                $response = [];
+                $response = Entity::output(
+                    $object,
+                    $task,
+                    $expose,
+                    $entity,
+                    __FUNCTION__,
+                    $response,
+                    $role
+                );
+                /*
                 $command = 'app raxon/task create -controller[]=' . escapeshellarg($name) . ' -user.email=' . escapeshellarg($user->email);
                 foreach($object->request() as $key => $value){
                     if($key === 'request'){
@@ -67,6 +99,8 @@ class Audio extends Controller {
                 //$record = Core::object(implode("\n", $output, $notification));
                 d($output);
                 dd($notification);
+                */
+                dd($response);
                 if(is_string($record)){
                     throw new Exception(implode("\n", $output));
                 }
