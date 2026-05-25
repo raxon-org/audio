@@ -65,6 +65,7 @@ class Audio extends Controller {
                 }
                 exec($command, $output);
                 $record = Core::object(implode("\n", $output));
+                ddd($record);
                 if(is_string($record)){
                     throw new Exception(implode("\n", $output));
                 }
