@@ -56,15 +56,16 @@ class Audio extends Controller {
                 //task create needs to return an uuid.
                 //need host backend
                 $name = 'Domain:' . Core::ucfirst_sentence("{{$options.backend.host}}") . ':Controller:Audio:speech.to.text.task';
-                $command = 'app raxon/task create -controller[]=' . $name . ' -user.email=' . $user->email;
+                $command = 'app raxon/task create -controller[]=' . escapeshellarg($name) . ' -user.email=' . escapeshellarg($user->email);
                 foreach($object->request() as $key => $value){
                     if($key === 'request'){
                         continue;
                     }
-                    $command .= ' -request.' . $key . '=' . $value;
+                    $command .= ' -request.' . escapeshellcmd($key) . '=' . escapeshellarg($value);
                 }
                 exec($command, $output);
                 $record = Core::object(implode("\n", $output));
+                d($output);
                 ddd($record);
                 if(is_string($record)){
                     throw new Exception(implode("\n", $output));
