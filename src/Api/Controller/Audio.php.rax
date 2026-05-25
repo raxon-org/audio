@@ -101,9 +101,11 @@ class Audio extends Controller {
                 dd($notification);
                 */
                 dd($response);
+                /*
                 if(is_string($record)){
                     throw new Exception(implode("\n", $output));
                 }
+                */
                 $entity = 'Task';
                 $node = new Node($object);
                 $role_system = $node->role_system();
