@@ -77,7 +77,7 @@ class Audio extends Controller {
                 $expose = Entity::expose_get(
                     $object,
                     $entity,
-                    $entity . '.'. __FUNCTION__ . '.output'
+                    $entity . '.create.output'
                 );
                 $response = [];
                 $response = Entity::output(
@@ -85,10 +85,11 @@ class Audio extends Controller {
                     $task,
                     $expose,
                     $entity,
-                    __FUNCTION__,
+                    'create',
                     $response,
                     $role
                 );
+                dd($response);
                 /*
                 $command = 'app raxon/task create -controller[]=' . escapeshellarg($name) . ' -user.email=' . escapeshellarg($user->email);
                 foreach($object->request() as $key => $value){
