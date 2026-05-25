@@ -70,6 +70,7 @@ class Audio extends Controller {
                 $task->setController([
                     $name
                 ]);
+                $task->setDescription('Speech to text task conversion from .wav generated in the browser and send to the backend to output a response.');
                 $task->setStatus(Status::PENDING);
                 $connection->manager->persist($task);
                 $connection->manager->flush();
