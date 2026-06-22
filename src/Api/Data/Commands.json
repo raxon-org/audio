@@ -3,9 +3,7 @@
       {
         "command" : [
           "open file manager",
-          "open. file manager",
           "open follow manager",
-          "open. follow manager",
           "open the file manager",
           "open fall manager",
           "open farm manager",
@@ -38,6 +36,28 @@
           "a racialized line"
         ],
         "route" : "application-ollama-line-eraser"
+      },
+      {
+        "command" : [
+          "move last word",
+          "remove last word",
+          "it is last word",
+          "that is last word",
+          "race last word",
+          "remove Laugh word",
+          "Remove Love word",
+          "i raised last word",
+          "a raise last word",
+          "we moved last word",
+          "you move last word",
+          "do lee last word",
+          "delete last word",
+          "erase last word",
+          "arise last word",
+          "arrays word",
+          "a racialized word"
+        ],
+        "route" : "application-ollama-word-eraser"
       }
     ]
 }
