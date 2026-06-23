@@ -91,7 +91,9 @@
           "raised last word",
           "raised last words",
           "be moved last word",
-          "be moved last words"
+          "be moved last words",
+          "remove glass word",
+          "remove glass words"
         ],
         "route" : "application-ollama-word-eraser"
       },
