@@ -40,7 +40,10 @@
           "be moved last line",
           "be moved last lines",
           "remove glass line",
-          "remove glass lines"
+          "remove glass lines",
+          "remove last sentence",
+          "we moved last sentence",
+          "remove our sentence"
         ],
         "route" : "application-ollama-line-eraser"
       },
@@ -93,7 +96,8 @@
           "be moved last word",
           "be moved last words",
           "remove glass word",
-          "remove glass words"
+          "remove glass words",
+          "we move backwards"
         ],
         "route" : "application-ollama-word-eraser"
       },
