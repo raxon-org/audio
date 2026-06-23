@@ -70,7 +70,9 @@
           "this shable microphone",
           "this table microphone.",
           "disable microphone",
-          "disable the microphone"
+          "disable the microphone",
+          "this shape of microphone",
+          "oh microphone"
         ],
         "route" : "application-ollama-microphone-quit"
       }
