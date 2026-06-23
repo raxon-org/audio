@@ -38,7 +38,9 @@
           "arrays offline",
           "a racialized line",
           "be moved last line",
-          "be moved last lines"
+          "be moved last lines",
+          "remove glass line",
+          "remove glass lines"
         ],
         "route" : "application-ollama-line-eraser"
       },
@@ -87,7 +89,9 @@
           "a rich last word",
           "a rich last words",
           "raised last word",
-          "raised last words"
+          "raised last words",
+          "be moved last word",
+          "be moved last words"
         ],
         "route" : "application-ollama-word-eraser"
       },
