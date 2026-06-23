@@ -47,7 +47,9 @@
           "remove glass sentence",
           "the lead law sentence",
           "the lead last sentence",
-          "the lead the last sentence"
+          "the lead the last sentence",
+          "erase last sentence",
+          "arise last sentence"
         ],
         "route" : "application-ollama-line-eraser"
       },
