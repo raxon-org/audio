@@ -80,7 +80,9 @@
           "at least last words",
           "at least last word",
           "is the last word",
-          "is the last words"
+          "is the last words",
+          "a rich last word",
+          "a rich last words"
         ],
         "route" : "application-ollama-word-eraser"
       },
