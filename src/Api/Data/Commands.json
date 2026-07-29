@@ -4,6 +4,7 @@
         "command" : [
           "open file manager",
           "open follow manager",
+          "open foul manager",
           "open the file manager",
           "open fall manager",
           "open farm manager",
@@ -13,7 +14,9 @@
           "oklahoma in a year",
           "open fire manager",
           "over 5 minutes here",
-          "for fall minute Year"
+          "for fall minute Year",
+          "hope and file manager",
+          "hope and fall manager"
         ],
         "route" : "application-file-manager"
       },
