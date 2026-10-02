@@ -29,7 +29,7 @@ use Raxon\Node\Module\Node;
 use Exception;
 Use Entity\Task;
 
-use Raxon\Exception\AuthorizationException;
+use Package\Raxon\Account\Exception\AuthorizationException;
 use Raxon\Exception\LocateException;
 use Raxon\Exception\UrlEmptyException;
 use Raxon\Exception\UrlNotExistException;
