@@ -57,30 +57,12 @@ class Audio extends Controller {
                 //task create needs to return an uuid.
                 //need host backend
                 $name = 'Domain:' . Core::ucfirst_sentence("{{$options.backend.host}}") . ':Controller:Audio:speech.to.text.task';
-                /*
                 $config = Database::config($object);
                 $connection = $object->config('doctrine.environment.system.*');
                 $connection->manager = Database::entity_manager($object, $config, $connection);
-                */
-                $class = 'System.Task';
+                $entity = 'Task';
                 $node = new Node($object);
                 $role_system = $node->role_system();
-                $record = (object) [
-                    'user' => $user->uuid,
-                    'request' => $object->request(),
-                    'command' => [],
-                    'controller' => [
-                        $name
-                    ],
-                    'description' => 'Speech to text task conversion from .wav generated in the browser and send to the backend to output a response.',
-                    'status' => Status::PENDING,
-                ];
-                $record =$node->create($class, $role_system, $record);
-                dd($record);
-                /*
-                $entity = 'Task';
-                */
-                /*
                 $task = new Task();
                 $task->setUser($user->uuid);
                 $task->setRequest($object->request());
@@ -107,7 +89,6 @@ class Audio extends Controller {
                     $record,
                     $role
                 );
-                */
                 $entity = 'Task';
                 $node = new Node($object);
                 $role_system = $node->role_system();
