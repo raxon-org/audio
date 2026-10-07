@@ -52,6 +52,7 @@ class Audio extends Controller {
                 $class = 'System.Task';
                 $node = new Node($object);
                 $role_system = $node->role_system();
+                $name = 'Domain:' . Core::ucfirst_sentence("{{$options.backend.host}}") . ':Controller:Audio:speech.to.text.task';
                 $record = (object) [
                     'user' => $user->uuid,
                     'request' => clone $object->request(),
