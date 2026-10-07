@@ -61,6 +61,7 @@ class Audio extends Controller {
                 $class = 'System.Task';
                 $node = new Node($object);
                 $role_system = $node->role_system();
+                ddd($object->request());
                 $record = (object) [
                     'user' => $user->uuid,
                     'request' => $object->request(),
@@ -71,8 +72,8 @@ class Audio extends Controller {
                     'description' => 'Speech to text task conversion from .wav generated in the browser and send to the backend to output a response.',
                     'status' => Status::PENDING,
                 ];
-                $record = $node->create($class, $role_system, $record);
-                dd($record);
+                $response = $node->create($class, $role_system, $record);
+                dd($response);
                 /*
                 $entity = 'Task';
                 */
