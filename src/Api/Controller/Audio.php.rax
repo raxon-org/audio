@@ -69,8 +69,16 @@ class Audio extends Controller {
                 while(true){
                     $repository_record = $node->record($class, $role_system, [
                         'where' => [
-                            'uuid' => $main->uuid,
-                            'status' => Status::COMPLETED
+                            'uuid' => [
+                                'attribute' => 'uuid',
+                                'operator' => '===',
+                                'value' => $main->uuid,
+                            ],
+                            'status' => [
+                                'attribute' => 'status',
+                                'operator' => '===',
+                                'value' => Status::COMPLETED,
+                            ]
                         ]
                     ]);
                     $record = $repository_record['node'] ?? null;
