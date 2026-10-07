@@ -40,10 +40,6 @@ class Audio extends Controller {
     const DIR = __DIR__ . DIRECTORY_SEPARATOR;
     const NAME = 'Audio';
 
-    /**
-     * @throws \Doctrine\DBAL\Exception
-     * @throws ORMException
-     */
     public static function speech_to_text(App $object){
         try {
             $role = Permission::controller(
@@ -75,7 +71,7 @@ class Audio extends Controller {
                     'description' => 'Speech to text task conversion from .wav generated in the browser and send to the backend to output a response.',
                     'status' => Status::PENDING,
                 ];
-                $record =$node->create($class, $role_system, $record);
+                $record = $node->create($class, $role_system, $record);
                 dd($record);
                 /*
                 $entity = 'Task';
