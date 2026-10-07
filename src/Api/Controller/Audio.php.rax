@@ -64,13 +64,13 @@ class Audio extends Controller {
                     'status' => Status::PENDING,
                 ];
                 $response = $node->create($class, $role_system, $record);
-                $node = $response['node'] ?? null;
+                $main = $response['node'] ?? null;
                 $role_system = $node->role_system();
                 $counter = 0;
                 while(true){
                     $repository_record = $node->record($class, $role_system, [
                         'where' => [
-                            'uuid' => $node->uuid,
+                            'uuid' => $main->uuid,
                             'status' => Status::COMPLETED
                         ]
                     ]);
