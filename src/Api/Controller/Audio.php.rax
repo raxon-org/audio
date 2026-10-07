@@ -76,6 +76,7 @@ class Audio extends Controller {
                     ]);
                     $record = $repository_record['node'] ?? null;
                     if($record !== null){
+                        ddd($record);
                         $record->counter = $counter;
                         if(property_exists($record, 'output')){
                             $output = '';
@@ -158,7 +159,7 @@ class Audio extends Controller {
                     }
                     usleep((int) (1/8 * 1000 * 1000));
                     $counter++;
-                    if($counter > 80){
+                    if($counter > 80000000){
                         break;
                     }
                 }
