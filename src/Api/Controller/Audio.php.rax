@@ -79,7 +79,8 @@ class Audio extends Controller {
                                 'operator' => '===',
                                 'value' => Status::COMPLETED,
                             ]
-                        ]
+                        ],
+                        'is_debug' => true
                     ]);
                     $record = $repository_record['node'] ?? null;
                     if($record !== null){
