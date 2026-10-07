@@ -75,6 +75,7 @@ class Audio extends Controller {
                         ]
                     ]);
                     $record = $repository_record['node'] ?? null;
+                    ddd($record);
                     if($record !== null){
                         $record->counter = $counter;
                         if(property_exists($record, 'output')){
