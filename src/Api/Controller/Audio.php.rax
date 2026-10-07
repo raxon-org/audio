@@ -72,68 +72,18 @@ class Audio extends Controller {
                     'status' => Status::PENDING,
                 ];
                 $response = $node->create($class, $role_system, $record);
-                dd($response);
-                /*
-                $entity = 'Task';
-                */
-                /*
-                $task = new Task();
-                $task->setUser($user->uuid);
-                $task->setRequest($object->request());
-                $task->setCommand([]);
-                $task->setController([
-                    $name
-                ]);
-                $task->setDescription('Speech to text task conversion from .wav generated in the browser and send to the backend to output a response.');
-                $task->setStatus(Status::PENDING);
-                $connection->manager->persist($task);
-                $connection->manager->flush();
-                $expose = Entity::expose_get(
-                    $object,
-                    $entity,
-                    $entity . '.create.output'
-                );
-                $record = [];
-                $record = (object) Entity::output(
-                    $object,
-                    $task,
-                    $expose,
-                    $entity,
-                    'create',
-                    $record,
-                    $role
-                );
-                */
-                $entity = 'Task';
-                $node = new Node($object);
                 $role_system = $node->role_system();
                 $counter = 0;
                 while(true){
-                    $app_cache = $object->get(App::CACHE);
-                    $config = Database::config($object);
-                    $connection = $object->config('doctrine.environment.system.*');
-                    $connection->manager = Database::entity_manager($object, $config, $connection);
-                    $cache = $connection->manager->getConfiguration()->getQueryCache();
-                    $cache->clear();
-                    $cache = $connection->manager->getConfiguration()->getMetadataCache();
-                    $cache->clear();
-                    $cache = $connection->manager->getConfiguration()->getResultCache();
-                    $cache->clear();
-                    $cache = $connection->manager->getUnitOfWork();
-                    $cache->clear();
-                    $connection->manager->clear();
-                    if($app_cache){
-                        $object->set(App::CACHE, $app_cache);
-                    }
-                    $repository = $connection->manager->getRepository('\\Entity\\Task');
-                    if(is_string($record)){
-                        throw new Exception($record);
-                    }
-                    $repository_record = $repository->findOneBy([
-                        'uuid' => $record->uuid,
-                        'status' => Status::COMPLETED
+                    $repository_record = $node->record($class, $role_system, [
+                        'where' => [
+                            'uuid' => $record->uuid,
+                            'status' => Status::COMPLETED
+                        ]
                     ]);
                     if($repository_record !== null){
+                        ddd($repository_record);
+                        /*
                         $expose = Entity::expose_get(
                             $object,
                             $entity,
@@ -227,6 +177,7 @@ class Audio extends Controller {
                             }
                             echo $output;
                         }
+                        */
                         break;
                     }
                     usleep((int) (1/8 * 1000 * 1000));
