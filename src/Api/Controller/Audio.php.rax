@@ -65,7 +65,6 @@ class Audio extends Controller {
                 ];
                 $response = $node->create($class, $role_system, $record);
                 $main = $response['node'] ?? null;
-                dd($main);
                 $counter = 0;
                 while(true){
                     $repository_record = $node->record($class, $role_system, [
