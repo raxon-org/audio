@@ -61,10 +61,9 @@ class Audio extends Controller {
                 $class = 'System.Task';
                 $node = new Node($object);
                 $role_system = $node->role_system();
-                ddd($object->request());
                 $record = (object) [
                     'user' => $user->uuid,
-                    'request' => $object->request(),
+                    'request' => clone $object->request(),
                     'command' => [],
                     'controller' => [
                         $name
