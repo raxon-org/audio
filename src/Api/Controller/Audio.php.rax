@@ -199,6 +199,8 @@ class Audio extends Controller {
                     //$whisper = Whisper::fromPretrained('small.en', $dir_model);
                     $audio = readAudio($object->request('url'));
                     $segments = $whisper->transcribe($audio, 4);
+                    $segments[] = 'test completed';
+                    return $segments;
                     // Accessing segment data
                     $output = [];
                     foreach ($segments as $segment) {
