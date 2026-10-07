@@ -49,15 +49,6 @@ class Audio extends Controller {
                 $user
             );
             if($role){
-                //move to service Audio::speech_to_text
-                //task create needs to return an uuid.
-                //need host backend
-                $name = 'Domain:' . Core::ucfirst_sentence("{{$options.backend.host}}") . ':Controller:Audio:speech.to.text.task';
-                /*
-                $config = Database::config($object);
-                $connection = $object->config('doctrine.environment.system.*');
-                $connection->manager = Database::entity_manager($object, $config, $connection);
-                */
                 $class = 'System.Task';
                 $node = new Node($object);
                 $role_system = $node->role_system();
@@ -72,6 +63,7 @@ class Audio extends Controller {
                     'status' => Status::PENDING,
                 ];
                 $response = $node->create($class, $role_system, $record);
+                $record = $response['node'] ?? null;
                 $role_system = $node->role_system();
                 $counter = 0;
                 while(true){
@@ -81,24 +73,8 @@ class Audio extends Controller {
                             'status' => Status::COMPLETED
                         ]
                     ]);
-                    if($repository_record !== null){
-                        ddd($repository_record);
-                        /*
-                        $expose = Entity::expose_get(
-                            $object,
-                            $entity,
-                            $entity . '.read.output'
-                        );
-                        $record = [];
-                        $record = (object) Entity::output(
-                            $object,
-                            $repository_record,
-                            $expose,
-                            $entity,
-                            'read',
-                            $record,
-                            $role_system
-                        );
+                    $record = $repository_record['node'] ?? null;
+                    if($record !== null){
                         $record->counter = $counter;
                         if(property_exists($record, 'output')){
                             $output = '';
@@ -177,7 +153,6 @@ class Audio extends Controller {
                             }
                             echo $output;
                         }
-                        */
                         break;
                     }
                     usleep((int) (1/8 * 1000 * 1000));
