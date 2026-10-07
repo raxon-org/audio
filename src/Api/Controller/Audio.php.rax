@@ -85,7 +85,6 @@ class Audio extends Controller {
                     $record = $repository_record['node'] ?? null;
                     if($record !== null){
                         d($repository_record);
-                        ddd($record);
                         $record->counter = $counter;
                         if(property_exists($record, 'output')){
                             $output = '';
@@ -210,7 +209,7 @@ class Audio extends Controller {
                             'end' => $segment->endTimestamp,
                         ];
                     }
-                    return $output;
+                    return Core::object($output, Core::JSON);
                     //outputfilter
                     $list = [
                         (object) [
