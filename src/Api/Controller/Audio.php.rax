@@ -233,6 +233,8 @@ class Audio extends Controller {
                         'function' => $function,
                         'response' => $output
                     ]);
+                    ddd($output);
+                    return $output['response'] ?? [];
                     /*
                     //make patch of task and update output
                     $config = Database::config($object);
@@ -248,7 +250,7 @@ class Audio extends Controller {
                     $record-
                     ddd($output);
                     */
-                    return $output['response'] ?? [];
+
                 }
             } catch (Exception | FileWriteException | ObjectException | LocateException | UrlEmptyException | UrlNotExistException $exception){
                 return $exception;
