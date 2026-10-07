@@ -4,8 +4,6 @@ namespace Domain\{{php.namespace.host($options.backend.host)}}\Controller;
 
 use Package\Raxon\Audio\SpeechToText\Whisper;
 use Package\Raxon\Task\Module\Status;
-use Raxon\Doctrine\Module\Entity;
-use Doctrine\ORM\Exception\ORMException;
 use Package\Raxon\Account\Module\Permission;
 
 use Raxon\App;
@@ -20,9 +18,6 @@ use Raxon\Module\File;
 
 use Raxon\Module\OutputFilter;
 use Raxon\Module\Response;
-
-use Raxon\Doctrine\Module\Database;
-
 use Raxon\Module\Route;
 use Raxon\Node\Module\Node;
 
@@ -191,7 +186,6 @@ class Audio extends Controller {
                     __FUNCTION__,
                     $user
                 );
-                ddd($role);
                 if($role){
                     //move to service Audio::speech_to_text_task
                     $dir_model = $object->config('project.dir.asset') . 'Audio/STT/';
@@ -200,8 +194,6 @@ class Audio extends Controller {
                     //$whisper = Whisper::fromPretrained('small.en', $dir_model);
                     $audio = readAudio($object->request('url'));
                     $segments = $whisper->transcribe($audio, 4);
-                    $segments[] = 'test completed';
-                    return $segments;
                     // Accessing segment data
                     $output = [];
                     foreach ($segments as $segment) {
@@ -212,6 +204,7 @@ class Audio extends Controller {
                             'end' => $segment->endTimestamp,
                         ];
                     }
+                    return $output;
                     return Core::object($output, Core::JSON);
                     //outputfilter
                     $list = [
