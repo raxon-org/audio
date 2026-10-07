@@ -65,7 +65,7 @@ class Audio extends Controller {
                 ];
                 $response = $node->create($class, $role_system, $record);
                 $main = $response['node'] ?? null;
-                $role_system = $node->role_system();
+                dd($main);
                 $counter = 0;
                 while(true){
                     $repository_record = $node->record($class, $role_system, [
@@ -75,7 +75,6 @@ class Audio extends Controller {
                         ]
                     ]);
                     $record = $repository_record['node'] ?? null;
-                    ddd($record);
                     if($record !== null){
                         $record->counter = $counter;
                         if(property_exists($record, 'output')){
