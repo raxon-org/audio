@@ -69,12 +69,12 @@ class Audio extends Controller {
                 while(true){
                     $repository_record = $node->record($class, $role_system, [
                         'where' => [
-                            'uuid' => [
+                            [
                                 'attribute' => 'uuid',
                                 'operator' => '===',
                                 'value' => $main->uuid,
                             ],
-                            'status' => [
+                            [
                                 'attribute' => 'status',
                                 'operator' => '===',
                                 'value' => Status::COMPLETED,
@@ -83,6 +83,7 @@ class Audio extends Controller {
                     ]);
                     $record = $repository_record['node'] ?? null;
                     if($record !== null){
+                        d($repository_record);
                         ddd($record);
                         $record->counter = $counter;
                         if(property_exists($record, 'output')){
