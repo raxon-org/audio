@@ -191,6 +191,7 @@ class Audio extends Controller {
                     __FUNCTION__,
                     $user
                 );
+                ddd($role);
                 if($role){
                     //move to service Audio::speech_to_text_task
                     $dir_model = $object->config('project.dir.asset') . 'Audio/STT/';
