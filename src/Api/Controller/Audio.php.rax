@@ -79,7 +79,6 @@ class Audio extends Controller {
                     ]);
                     $record = $repository_record['node'] ?? null;
                     if($record !== null){
-                        d($repository_record);
                         $record->counter = $counter;
                         if(property_exists($record, 'output')){
                             $output = '';
@@ -89,8 +88,15 @@ class Audio extends Controller {
                                     if(stristr($value['text'], 'blank_audio')){
                                         $output .= ' ';
                                     } else {
-                                    //On in, open file manager.
                                         $output .= $value['text'];
+                                    }
+                                }
+                                if(is_object($value) && property_exists($value, 'text')){
+                                    //add some json from to here and add a form for it...
+                                    if(stristr($value->text, 'blank_audio')){
+                                        $output .= ' ';
+                                    } else {
+                                        $output .= $value->text;
                                     }
                                 }
                             }
